@@ -5,29 +5,24 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sheryians.major.model.Product;
+
+import com.sheryians.major.Model.Product;
 import com.sheryians.major.repository.ProductRepo;
 
 @Service
 public class ProductService {
-
-	
 	@Autowired
-	ProductRepo pr;
+	ProductRepo productRepo;
 	
-	public List<Product> getAllProd(){
-		return pr.findAll();
-	}
-	public void addProd(Product prod) {
-		pr.save(prod);
-	}
-	
-	public void deleteProdById(int id) {
-		pr.deleteById(id);
-	}
+	public List<Product> getAllProducts(){	return productRepo.findAll();}
+	public void addProduct(Product product) { productRepo.save(product);}   
+	public void deleteProductById(long id) {  productRepo.deleteById(id);}
+    public List<Product> getAllProductsByCategoryId(int id){
+    	return productRepo.findAllByCategory_id(id);
+    }
     
-	public Optional<Product> getProd(int id){
-		return pr.findById(id);
-	}
+    public Optional<Product> getProductById(long id){
+    	return productRepo.findById(id);
+    }
 	
 }
